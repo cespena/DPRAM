@@ -1,0 +1,35 @@
+def r():
+    print(mul.read(0x0), mul.read(0x4), mul.read(0x8), mul.read(0xc))
+
+def h():
+    print(hex(mul.read(0x0)), hex(mul.read(0x4)), hex(mul.read(0x8)), hex(mul.read(0xc)))
+
+def aw(input):
+    mul.write(0x4, input)
+    mul.write(0x0, 0x4)
+    for i in range(25):
+        mul.write(0x0, (i*65536) + 4)
+    mul.write(0x0, 0x0)
+
+def bw(input):
+    mul.write(0x4, input)
+    mul.write(0x0, 0x8)
+    for i in range(5):
+        mul.write(0x0, (i*65536) + 8)
+    mul.write(0x0, 0x0)
+
+def ar():
+    for i in range(25):
+        mul.write(0x0, i*65536)
+        h()
+    mul.write(0x0, 0x0)
+
+def br():
+    for i in range(5):
+        mul.write(0x0, i*65536)
+        h()
+    mul.write(0x0, 0x0)
+def run():
+    mul.write(0x0, 0x3)
+    mul.write(0x0, 0x2)
+    mul.write(0x0, 0x0)
